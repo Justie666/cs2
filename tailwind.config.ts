@@ -19,7 +19,10 @@ export default {
 			},
 			backdropBlur: {
 				'20': '20px'
-			}
+			},
+			backgroundImage: {
+				'custom-radial': 'radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #C9A86B 100%)',
+			},
 		}
 	},
 	plugins: []
