@@ -1,6 +1,8 @@
 import {CoinIcon} from "../icons/CoinIcon.tsx";
 import {TetherIcon} from "../icons/TetherIcon.tsx";
 import {useState} from "react";
+import {BulletsIcon} from "../icons/BulletsIcon.tsx";
+import {Button} from "../components/Button.tsx";
 
 const TrainingPage = () => {
     const [isOpenWorkout, setIsOpenWorkout] = useState<boolean>(false)
@@ -30,11 +32,11 @@ const TrainingPage = () => {
                 </div>
             </div>
             {!isOpenWorkout ? (
-                <div>
+                <div className='w-full'>
                     <img
                         src={'/Rectangle 133.png'}
                         alt={''}
-                        className="w-full h-[458px] rounded-full absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-primary border-4 transition-all duration-100 ease-out scale-100 opacity-100"
+                        className="w-full h-[50%] rounded-full absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-primary border-4 transition-all duration-100 ease-out scale-100 opacity-100"
                     />
                     <img
                         src={'/workout.png'}
@@ -44,11 +46,11 @@ const TrainingPage = () => {
                     />
                 </div>
             ) : (
-                <div>
+                <div className='w-full'>
                     <img
                         src={'/Training-is-all-move.png'}
                         alt={''}
-                        className="w-full h-[688px] absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-100 ease-out scale-100 opacity-100"
+                        className="w-full h-[72%] absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-100 ease-out scale-100 opacity-100"
                     />
                     <img
                         src={'/workout.png'}
@@ -60,11 +62,25 @@ const TrainingPage = () => {
             )}
             {isStartWorkout ?
                 <img
-                src={'/background.png'}
-                alt={''}
-                className="w-full h-[688px] absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-primary border-4 rounded-[77px] z-0"
-            /> :
+                    src={'/background.png'}
+                    alt={''}
+                    className="w-full h-[72%] absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-primary border-4 rounded-[77px] z-0"
+                /> :
                 null}
+            <Button
+                children={'Завершить тренировку'}
+                isOrange={true}
+                className='bg-custom-radial text-[#000] text-[15px] font-medium w-full py-2 rounded-[8px] z-30 absolute bottom-[100px]'
+            />
+            <div className='size-[310px] left-1/2 -translate-x-1/2 -bottom-28 absolute z-20 bg-bgColor rounded-full shadow-[inset_3px_3px_27.6px_#000000CC] flex items-center justify-center'>
+                <div className='rounded-full bg-[#000] shadow-[0px_-4px_4px_0px_#C9A86B] size-[220px] flex justify-center items-start pt-[35px]'>
+                    <div className='flex items-center gap-3'>
+                        <BulletsIcon/>
+                        <BulletsIcon/>
+                        <BulletsIcon/>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
