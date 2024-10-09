@@ -12,7 +12,8 @@ export default {
 			},
 			boxShadow: {
 				'inset-custom': '3px 3px 27.6px 0px #000000CC inset',
-				'custom-large': '73px 49px 25px 0px #00000000'
+				'custom-large': '73px 49px 25px 0px #00000000',
+				'inset-black': '0px 3px 4px 0px #000000 inset',
 			},
 			rounded: {
 				xl: 50
