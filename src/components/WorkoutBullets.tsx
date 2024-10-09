@@ -24,7 +24,7 @@ const WorkoutBullets = ({ bulletsCount }: IWorkoutBulletsProps) => {
                     </svg>
                     : <BulletsIcon/>
                 }
-                <span className="text-[32px]">{bulletsCount}</span>
+                <span className="text-[32px]">{bulletsCount}</span> {/* TODO: Добавить тень для текста */}
             </div>
     );
 };
