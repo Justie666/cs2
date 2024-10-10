@@ -5,6 +5,7 @@ import {BulletsIcon} from "../icons/BulletsIcon.tsx";
 import {Button} from "../components/Button.tsx";
 import WorkoutBulletsContainer from "../components/WorkoutBulletsContainer.tsx";
 import {useNavigate} from "react-router-dom";
+import WorkoutTerrorists from "../components/WorkoutTerrorists.tsx";
 
 const TrainingPage = () => {
     const [isOpenWorkout, setIsOpenWorkout] = useState<boolean>(false)
@@ -38,7 +39,7 @@ const TrainingPage = () => {
             }
 
             if(newBullets.every(count => count === 0)) {
-               handleEndWorkout()
+                handleEndWorkout()
             }
 
             return newBullets
@@ -92,14 +93,9 @@ const TrainingPage = () => {
                 )
             )}
 
-            {isStartWorkout && (
-                <img
-                    src={'/background.png'}
-                    alt={''}
-                    className="w-full h-[72%] absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-primary border-4 rounded-[77px] z-0"
-                    onClick={handleDecreaseBullets}
-                />
-            )}
+            {isStartWorkout &&
+                <WorkoutTerrorists handleDecreaseBullets={handleDecreaseBullets}/>
+            }
             <div className='flex items-center justify-between w-[81%] gap-[22px] absolute bottom-[140px] z-40'>
                 <WorkoutBulletsContainer bullets={bullets}/>
             </div>
