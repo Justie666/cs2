@@ -12,6 +12,7 @@ import { SettingsPage } from './pages/SettingsPage'
 import { BetsPage } from './pages/BetsPage'
 import { StatsBetsPage } from './pages/StatsBetsPage'
 import { ShopPage } from './pages/ShopPage'
+import TrainingPage from "./pages/TrainingPage.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
 			{
 				path: '/shop',
 				element: <ShopPage />
+			},
+			{
+				path: '/training',
+				element: <TrainingPage/>
 			}
 		]
 	}

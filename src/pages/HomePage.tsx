@@ -36,13 +36,16 @@ export const HomePage = () => {
 				</div>
 			</div>
 
-			<div className='flex justify-center mt-[30px]'>
+			<Link
+				to={'/training'}
+				className='flex justify-center mt-[30px]'
+			>
 				<img
 					src='/crosshair.png'
 					alt=''
 					className='size-[250px] object-cover'
 				/>
-			</div>
+			</Link>
 			<div className='size-[310px] left-1/2 -translate-x-1/2 -bottom-28 absolute z-20 bg-bgColor rounded-full shadow-[inset_3px_3px_27.6px_#000000CC] flex items-center justify-center'>
 				<div className='rounded-full bg-[#000] shadow-[0px_-4px_4px_0px_#C9A86B] size-[220px] flex justify-center items-start pt-[35px]'>
 					<div className='flex items-center gap-3'>
