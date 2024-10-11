@@ -11,6 +11,8 @@ const TrainingPage = () => {
     const [isOpenWorkout, setIsOpenWorkout] = useState<boolean>(false)
     const [isStartWorkout, setIsStartWorkout] = useState<boolean>(false)
     const [bullets, setBullets] = useState<number[]>([10, 10, 10])
+    const [coins, setCoins] = useState<number>(0)
+    const [showCoinGain, setShowCoinGain] = useState(false)
 
     const navigate = useNavigate()
 
@@ -27,6 +29,12 @@ const TrainingPage = () => {
         setIsStartWorkout(false)
         setIsOpenWorkout(false)
         navigate('/')
+    }
+
+    const handleCoinsUpdate = (increment: number) => {
+        setCoins(prevCoins => prevCoins + increment)
+        setShowCoinGain(true)
+        setTimeout(() => setShowCoinGain(false), 1000)
     }
 
     const handleDecreaseBullets = () => {
@@ -51,9 +59,12 @@ const TrainingPage = () => {
         <div className='relative container px-5 pt-4 flex flex-col min-h-screen z-10 overflow-hidden items-center'>
             <div className='w-11/12 h-[79px] flex items-center justify-center rounded-[27px] shadow-inset-custom z-20 bg-bgColor'>
                 <div className='flex items-center justify-center gap-[30px]'>
+                    {showCoinGain && (
+                        <span className="text-red-500 animate-coin-gain absolute left-[20%] font-bold text-[20px]">+1</span>
+                    )}
                     <div className='shadow-inset-custom rounded-full px-2 flex items-center gap-[6px]'>
                         <CoinIcon/>
-                        <div className='font-medium text-[20px]'>321</div>
+                        <div className='font-medium text-[20px]'>{coins}</div>
                     </div>
                     <div className='shadow-inset-custom rounded-full px-2 flex items-center gap-[6px]'>
                         <TetherIcon/>
@@ -94,7 +105,7 @@ const TrainingPage = () => {
             )}
 
             {isStartWorkout &&
-                <WorkoutTerrorists handleDecreaseBullets={handleDecreaseBullets}/>
+                <WorkoutTerrorists handleDecreaseBullets={handleDecreaseBullets} onCoinsUpdate={handleCoinsUpdate} />
             }
             <div className='flex items-center justify-between w-[81%] gap-[22px] absolute bottom-[140px] z-40'>
                 <WorkoutBulletsContainer bullets={bullets}/>
