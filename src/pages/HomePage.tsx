@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import { BackpackIcon } from '../icons/BackpackIcon'
 import { BulletsIcon } from '../icons/BulletsIcon'
-import { CoinIcon } from '../icons/CoinIcon'
-import { TetherIcon } from '../icons/TetherIcon'
+import Balance from "../components/Balance.tsx";
 
 export const HomePage = () => {
 	return (
@@ -25,14 +24,7 @@ export const HomePage = () => {
 					</Link>
 				</div>
 				<div className='flex items-center justify-center gap-[30px] mt-[20px]'>
-					<div className='shadow-inset-custom rounded-full px-2 flex items-center gap-[6px]'>
-						<CoinIcon />
-						<div className='font-medium text-[20px]'>321</div>
-					</div>
-					<div className='shadow-inset-custom rounded-full px-2 flex items-center gap-[6px]'>
-						<TetherIcon />
-						<div className='font-medium text-[20px]'>321</div>
-					</div>
+					<Balance />
 				</div>
 			</div>
 
