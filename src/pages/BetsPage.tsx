@@ -4,6 +4,7 @@ import { CoinIcon } from '../icons/CoinIcon'
 import { CoinInfoIcon } from '../icons/CoinInfoIcon'
 import { TetherIcon } from '../icons/TetherIcon'
 import { useState } from 'react'
+import { BetItem } from '../components/BetItem'
 
 export const BetsPage = () => {
 	const [filterBets, setFilterBets] = useState<BetTypeFilter>('current')
@@ -13,7 +14,7 @@ export const BetsPage = () => {
 	}
 
 	return (
-		<div className='py-[30px] px-[50px]'>
+		<div className='py-[30px] px-[20px]'>
 			<div className='flex items-center justify-center gap-[20px] text-[20px] font-medium'>
 				<Link
 					to={'/stats-bets'}
@@ -38,6 +39,9 @@ export const BetsPage = () => {
 					isOrange={filterBets === 'current'}>
 					Текущие события
 				</Button>
+			</div>
+			<div className='mt-[40px]'>
+				<BetItem />
 			</div>
 		</div>
 	)

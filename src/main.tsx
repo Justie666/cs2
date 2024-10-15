@@ -12,6 +12,7 @@ import { SettingsPage } from './pages/SettingsPage'
 import { BetsPage } from './pages/BetsPage'
 import { StatsBetsPage } from './pages/StatsBetsPage'
 import { ShopPage } from './pages/ShopPage'
+import { CaseIdPage } from './pages/CaseIdPage'
 
 const router = createBrowserRouter([
 	{
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
 			{
 				path: '/stats-bets',
 				element: <StatsBetsPage />
+			},
+			{
+				path: '/case/:id',
+				element: <CaseIdPage />
 			},
 			{
 				path: '/shop',

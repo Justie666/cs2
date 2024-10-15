@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { CoinIcon } from '../icons/CoinIcon'
 import { TeamIcon } from '../icons/TeamIcon'
 import { TetherIcon } from '../icons/TetherIcon'
@@ -6,11 +7,21 @@ interface SkinItemProps {
 	imgUrl: string
 	currency: 'tether' | 'coin' | 'referrals'
 	value: string
+	href?: string
 }
 
-export const SkinItem = ({ currency, imgUrl, value }: SkinItemProps) => {
+export const SkinItem = ({ currency, imgUrl, value, href }: SkinItemProps) => {
+	const navigate = useNavigate()
+	const handleClick = () => {
+		if (href) {
+			navigate(href)
+		}
+	}
+
 	return (
-		<div className='relative'>
+		<div
+			onClick={() => handleClick()}
+			className={`relative ${href && 'cursor-pointer'}`}>
 			<div className='w-full aspect-square rounded-[15px] bg-[#161616] flex items-center justify-center'>
 				<img src={imgUrl} alt='' />
 			</div>
