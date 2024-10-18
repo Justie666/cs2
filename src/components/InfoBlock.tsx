@@ -1,6 +1,6 @@
 interface InfoBlockProps {
 	title: string
-	value: string
+	value: string | number
 }
 export const InfoBlock = ({ title, value }: InfoBlockProps) => {
 	return (

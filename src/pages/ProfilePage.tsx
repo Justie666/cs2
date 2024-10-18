@@ -7,8 +7,11 @@ import { SkinIcon } from '../icons/SkinIcon'
 import { RefIcon } from '../icons/RefIcon'
 import { BetsIcon } from '../icons/BetsIcon'
 import { SettingsIcon } from '../icons/SettingsIcon'
+import { useGetUserFull } from '../api/hooks/userHooks'
 
 export const ProfilePage = () => {
+	useGetUserFull()
+
 	return (
 		<div className=''>
 			<Drawer
@@ -45,7 +48,7 @@ export const ProfilePage = () => {
 									svg={<StatsIcon />}
 									title='Статистика'
 								/>
-								<ProfileLink to='/skins' svg={<SkinIcon />} title='Скины' />
+								<ProfileLink to='/my-skins' svg={<SkinIcon />} title='Скины' />
 							</div>
 							<div className='flex items-center gap-[32px] justify-center'>
 								<ProfileLink
@@ -53,7 +56,7 @@ export const ProfilePage = () => {
 									svg={<RefIcon />}
 									title='Рефералы'
 								/>
-								<ProfileLink to='/bets' svg={<BetsIcon />} title='Ставки' />
+								<ProfileLink to='/my-bets' svg={<BetsIcon />} title='Ставки' />
 							</div>
 						</div>
 					</div>

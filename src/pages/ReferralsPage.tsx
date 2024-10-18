@@ -1,7 +1,9 @@
+import { useGetUserFull } from '../api/hooks/userHooks'
 import { Drawer } from '../components/Drawer'
 import { PlusIcon } from '../icons/PlusIcon'
 
 export const ReferralsPage = () => {
+	const { data } = useGetUserFull()
 	return (
 		<div>
 			<Drawer
@@ -22,18 +24,14 @@ export const ReferralsPage = () => {
 					<div className='rounded-full border-[3px] border-primary aspect-square bg-[rgba(76,76,76,0.4)] flex items-center justify-center'>
 						<PlusIcon />
 					</div>
-					<div className='rounded-full border-[3px] border-primary aspect-square'>
-						<img src='https://www.svgrepo.com/show/81103/avatar.svg' alt='' />
-					</div>
-					<div className='rounded-full border-[3px] border-primary aspect-square'>
-						<img src='https://www.svgrepo.com/show/81103/avatar.svg' alt='' />
-					</div>
-					<div className='rounded-full border-[3px] border-primary aspect-square'>
-						<img src='https://www.svgrepo.com/show/81103/avatar.svg' alt='' />
-					</div>
-					<div className='rounded-full border-[3px] border-primary aspect-square'>
-						<img src='https://www.svgrepo.com/show/81103/avatar.svg' alt='' />
-					</div>
+					{data?.referrals &&
+						data?.referrals.map(item => (
+							<div
+								key={item.photo_url}
+								className='rounded-full border-[3px] border-primary aspect-square'>
+								<img src={item.photo_url} alt='Referral' />
+							</div>
+						))}
 				</div>
 			</Drawer>
 		</div>

@@ -6,7 +6,7 @@ import { TetherIcon } from '../icons/TetherIcon'
 interface SkinItemProps {
 	imgUrl: string
 	currency: 'tether' | 'coin' | 'referrals'
-	value: string
+	value: string | number
 	href?: string
 }
 

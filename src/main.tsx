@@ -13,6 +13,9 @@ import { BetsPage } from './pages/BetsPage'
 import { StatsBetsPage } from './pages/StatsBetsPage'
 import { ShopPage } from './pages/ShopPage'
 import { CaseIdPage } from './pages/CaseIdPage'
+import { MySkinsPage } from './pages/MySkinsPage'
+import { MySkinIdPage } from './pages/MySkinIdPage'
+import { MyBetsPage } from './pages/MyBetsPage'
 
 const router = createBrowserRouter([
 	{
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
 			{
 				path: '/profile',
 				element: <ProfilePage />
+			},
+			{
+				path: '/my-skins',
+				element: <MySkinsPage />
+			},
+			{
+				path: '/my-bets',
+				element: <MyBetsPage />
+			},
+			{
+				path: '/my-skin/:id',
+				element: <MySkinIdPage />
 			},
 			{
 				path: '/referrals',
