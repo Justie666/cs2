@@ -10,7 +10,7 @@ export const authService = {
 			localStorage.setItem('access_token', accessToken)
 		}
 
-		return response.data
+		return response
 	},
 
 	validateJwt: async () => {

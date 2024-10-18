@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CoinIcon } from '../icons/CoinIcon'
 import { TetherIcon } from '../icons/TetherIcon'
 import { formatToUserTimezone } from '../utils/formatToUserTimezone'
@@ -7,6 +7,7 @@ import { ArrowDownIcon2 } from '../icons/ArrowDownIcon2'
 
 export const BetItem = ({ bet }: { bet: IBets }) => {
 	const [isOpen, setIsOpen] = useState(false)
+	const [isWon, setIsWon] = useState(false)
 
 	const amountTeam1 =
 		bet.event.teams[0].total_coin + bet.event.teams[0].total_usdt
@@ -22,13 +23,52 @@ export const BetItem = ({ bet }: { bet: IBets }) => {
 
 	const betType = bet.bet_type as BetType
 
+	console.log(bet.event.teams[0].id)
+	console.log(bet.event.teams)
+
+	useEffect(() => {
+		if (betType === 'knife') {
+			if (bet.event.knife) setIsWon(true)
+		} else if (betType === 'dry_bill') {
+			if (bet.event.dry_bill) setIsWon(true)
+		} else if (betType === 'win') {
+			setIsWon(
+				bet.event.teams.find(team => team.id === bet.event_team_id)?.team.id ===
+					bet.event.won
+			)
+		} else if (betType === 'winner_first_card') {
+			setIsWon(
+				bet.event.teams.find(team => team.id === bet.event_team_id)?.team.id ===
+					bet.event.won_first_map
+			)
+		} else if (betType === 'winner_second_card') {
+			setIsWon(
+				bet.event.teams.find(team => team.id === bet.event_team_id)?.team.id ===
+					bet.event.won_second_map
+			)
+		} else {
+			setIsWon(true)
+		}
+	}, [
+		bet.event.dry_bill,
+		bet.event.knife,
+		bet.event.teams,
+		bet.event.won,
+		bet.event.won_first_map,
+		bet.event.won_second_map,
+		bet.event_team_id,
+		betType
+	])
+
 	return (
 		<div>
 			<div className='relative mb-[20px]'>
 				<div className='flex items-center gap-[20px] justify-center border-2 border-primary bg-[rgba(76,76,76,0.5)] py-[23px] px-[21px] rounded-[20px] relative z-10'>
 					<div className='flex flex-col items-center justify-center'>
 						<div className='rounded-full border border-primary size-[71px] shadow-[0px_-4px_4px_0px_#C9A86B] relative'>
-							<div className='absolute inset-0 bg-red-800/60 p-[1px] rounded-full' />
+							{bet.event.teams[0].team.id !== bet.event.won && (
+								<div className='absolute inset-0 bg-red-800/60 p-[1px] rounded-full' />
+							)}
 
 							<img
 								src={bet.event.teams[0].team.logo_url}
@@ -43,7 +83,7 @@ export const BetItem = ({ bet }: { bet: IBets }) => {
 								}
 							/>
 						</div>
-						<div className='font-medium text-[15px]'>
+						<div className='font-medium text-[15px] text-center'>
 							{bet.event.teams[0].team.name}
 						</div>
 						<div className='text-[12px]'>{percentTeam1}</div>
@@ -76,7 +116,9 @@ export const BetItem = ({ bet }: { bet: IBets }) => {
 					</div>
 					<div className='flex flex-col items-center justify-center'>
 						<div className=' rounded-full border border-primary size-[71px] relative'>
-							<div className='absolute inset-0 bg-red-800/60 p-[1px] rounded-full'></div>
+							{bet.event.teams[1].team.id !== bet.event.won && (
+								<div className='absolute inset-0 bg-red-800/60 p-[1px] rounded-full' />
+							)}
 							<img
 								src={bet.event.teams[1].team.logo_url}
 								className='rounded-full'
@@ -90,7 +132,7 @@ export const BetItem = ({ bet }: { bet: IBets }) => {
 								}
 							/>
 						</div>
-						<div className='font-medium text-[15px]'>
+						<div className='font-medium text-[15px] text-center'>
 							{bet.event.teams[1].team.name}
 						</div>
 						<div className='text-[12px]'>{percentTeam2}</div>
@@ -117,11 +159,14 @@ export const BetItem = ({ bet }: { bet: IBets }) => {
 			</div>
 			{isOpen && (
 				<div className='mt-[10px] flex flex-col gap-[5px] relative mb-[20px]'>
-					<div className='bg-[rgba(76,76,76,1)] rounded-[17px] pt-[12px] px-[14px] pb-[12px] relative z-40'>
+					<div className='bg-[rgba(76,76,76,1)] rounded-[17px] pt-[12px] px-[20px] pb-[12px] relative z-40'>
 						<div className='text-[12px] font-medium text-primary'>
 							Ваша ставка
 						</div>
-						<div className='text-[15px] font-medium flex justify-between'>
+						<div
+							className={`text-[15px] font-medium flex justify-between ${
+								isWon ? 'text-green-400' : 'text-red-400'
+							}`}>
 							<div>{getBetType(betType)} </div>
 							{betType === 'winner_first_card' ||
 							betType === 'winner_second_card' ||

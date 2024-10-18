@@ -4,7 +4,6 @@ import { Loader2 } from 'lucide-react'
 
 export const LoginWrapper = ({ children }: PropsWithChildren) => {
 	const { mutate, isPending } = usePostLogin()
-
 	useEffect(() => {
 		// Trigger login or mutation based on certain conditions
 		mutate({

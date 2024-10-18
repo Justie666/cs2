@@ -103,13 +103,16 @@ interface ITeams {
 	team: ITeam
 }
 
-type EventStatus = 'active' | 'winner_one' | 'winner_two'
-
 interface IEvent {
 	id: number
 	date_start: string
-	status: EventStatus
+	status: boolean
 	created_at: string
+	won: number | null
+	won_first_map: number | null
+	won_second_map: number | null
+	dry_bill: number | null
+	knife: number | null
 	teams: ITeams[]
 }
 
