@@ -18,7 +18,7 @@ export const ShopPage = () => {
 				<Button
 					onClick={() => handleSelectShopType('skins')}
 					isOrange={shopType === 'skins'}>
-					Магазин
+					Скины
 				</Button>
 				<Button
 					onClick={() => handleSelectShopType('cases')}

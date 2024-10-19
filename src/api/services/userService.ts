@@ -19,5 +19,13 @@ export const userService = {
 
 	updateTradeURL: async (data: UpdateTradeURLData) => {
 		return (await authApi.patch('/user/tradeURL', data)).data
+	},
+
+	check: async (id: number) => {
+		return (
+			await authApi.get('/user/check', {
+				params: { user_id: id }
+			})
+		).data
 	}
 }

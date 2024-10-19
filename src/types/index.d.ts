@@ -9,6 +9,7 @@ interface UserMain {
 	count_clip: number
 	balance_coin: number
 	balance_usdt: number
+	balance_referrers: number
 }
 
 interface IStatistics {
@@ -147,7 +148,7 @@ interface CreateUserData {
 	id: string
 	name: string
 	username: string
-	referrer_id: string
+	referrer_id: string | null
 	time_zone: string
 }
 
@@ -163,4 +164,13 @@ interface GetTradeURLResponse {
 
 interface UpdateTradeURLData {
 	trade_url: string
+}
+
+interface CreateBetData {
+	event_id: number
+	event_team_id: number | null
+	bet_type: BetType
+	bet: boolean
+	currency: Currency
+	amount: number
 }

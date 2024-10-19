@@ -7,10 +7,11 @@ import { SkinIcon } from '../icons/SkinIcon'
 import { RefIcon } from '../icons/RefIcon'
 import { BetsIcon } from '../icons/BetsIcon'
 import { SettingsIcon } from '../icons/SettingsIcon'
-import { useGetUserFull } from '../api/hooks/userHooks'
+import { useGetUserFull, useGetUserMain } from '../api/hooks/userHooks'
 
 export const ProfilePage = () => {
 	useGetUserFull()
+	const { data } = useGetUserMain()
 
 	return (
 		<div className=''>
@@ -26,12 +27,12 @@ export const ProfilePage = () => {
 				}>
 				<div className='size-[270px] mx-auto'>
 					<img
-						src='https://www.svgrepo.com/show/81103/avatar.svg'
+						src={data?.photo_url ? data?.photo_url : '/avatar.jpg'}
 						alt='avatar'
 						className='rounded-full object-cover mx-auto border-[3px] border-primary'
 					/>
 					<div className='mt-[15px] text-[32px] font-semibold text-center'>
-						userxxxxxxxx
+						{window.Telegram.WebApp.initDataUnsafe.user?.first_name}
 					</div>
 				</div>
 				<div className='relative mt-[150px] aspect-square w-full rounded-full bg-bgColor shadow-[inset_1px_14px_30px_0px_#0000001A,_inset_4px_55px_55px_0px_#00000017,_inset_10px_123px_74px_0px_#0000000D,_inset_18px_218px_88px_0px_#00000003,_inset_28px_341px_96px_0px_#00000000] mx-auto'>

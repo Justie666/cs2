@@ -1,22 +1,24 @@
 import { Link } from 'react-router-dom'
 import { BackpackIcon } from '../icons/BackpackIcon'
 import { BulletsIcon } from '../icons/BulletsIcon'
-import { CoinIcon } from '../icons/CoinIcon'
-import { TetherIcon } from '../icons/TetherIcon'
+import { Balance } from '../components/Balance'
+import { useGetUserMain } from '../api/hooks/userHooks'
 
 export const HomePage = () => {
+	const { data } = useGetUserMain()
+
 	return (
 		<div className='relative container px-5 pt-4 flex flex-col min-h-screen z-10 overflow-hidden'>
 			<div>
 				<div className='shadow-inset-custom bg-bgColor rounded-xl px-9 py-4 flex items-center justify-between gap-3'>
 					<img
-						src='https://www.svgrepo.com/show/81103/avatar.svg'
+						src={data?.photo_url ? data?.photo_url : '/avatar.jpg'}
 						alt='avatar'
 						className='size-[50px] rounded-full overflow-hidden object-cover flex-shrink-0'
 					/>
 					{/* TODO сделать получение имени из тг */}
 					<div className='rounded-[50px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.5)] px-4 py-3 font-medium text-[20px] w-full'>
-						user
+						{window.Telegram.WebApp.initDataUnsafe.user?.first_name}
 					</div>
 					<Link
 						to={'/profile'}
@@ -24,15 +26,8 @@ export const HomePage = () => {
 						<BackpackIcon />
 					</Link>
 				</div>
-				<div className='flex items-center justify-center gap-[30px] mt-[20px]'>
-					<div className='shadow-inset-custom rounded-full px-2 flex items-center gap-[6px]'>
-						<CoinIcon />
-						<div className='font-medium text-[20px]'>321</div>
-					</div>
-					<div className='shadow-inset-custom rounded-full px-2 flex items-center gap-[6px]'>
-						<TetherIcon />
-						<div className='font-medium text-[20px]'>321</div>
-					</div>
+				<div className='mt-[20px]'>
+					<Balance />
 				</div>
 			</div>
 

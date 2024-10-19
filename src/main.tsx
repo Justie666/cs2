@@ -16,6 +16,7 @@ import { CaseIdPage } from './pages/CaseIdPage'
 import { MySkinsPage } from './pages/MySkinsPage'
 import { MySkinIdPage } from './pages/MySkinIdPage'
 import { MyBetsPage } from './pages/MyBetsPage'
+import { BetPage } from './pages/BetPage'
 
 const router = createBrowserRouter([
 	{
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
 			{
 				path: '/case/:id',
 				element: <CaseIdPage />
+			},
+			{
+				path: '/bet/:type/:id',
+				element: <BetPage />
 			},
 			{
 				path: '/shop',

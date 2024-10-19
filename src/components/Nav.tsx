@@ -15,6 +15,7 @@ export const Nav = () => {
 	if (pathname.includes('/my-skin/')) return
 	if (pathname.includes('/my-bets/')) return
 	if (pathname.includes('/my-bets')) return
+	if (pathname.includes('/bet/')) return
 
 	return (
 		<div className='rounded-[27px] shadow-[0px_-4px_14px_0px_#C9A86B] fixed z-20 bottom-0 w-[99%] left-1/2 -translate-x-1/2 overflow-hidden'>

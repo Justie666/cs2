@@ -1,9 +1,16 @@
+import { toast } from 'sonner'
 import { useGetUserFull } from '../api/hooks/userHooks'
 import { Drawer } from '../components/Drawer'
 import { PlusIcon } from '../icons/PlusIcon'
 
 export const ReferralsPage = () => {
 	const { data } = useGetUserFull()
+
+	const handleCopy = () => {
+		navigator.clipboard.writeText('https://betswap.io?referrer32133')
+		toast.success('Ссылка скопирована')
+	}
+
 	return (
 		<div>
 			<Drawer
@@ -20,8 +27,9 @@ export const ReferralsPage = () => {
 					</span>
 				</div>
 				<div className='mt-[40px] grid grid-cols-3 gap-[20px]'>
-					{/* TODO сделать логику для добавления реферала */}
-					<div className='rounded-full border-[3px] border-primary aspect-square bg-[rgba(76,76,76,0.4)] flex items-center justify-center'>
+					<div
+						onClick={() => handleCopy()}
+						className='rounded-full border-[3px] border-primary aspect-square bg-[rgba(76,76,76,0.4)] flex items-center justify-center'>
 						<PlusIcon />
 					</div>
 					{data?.referrals &&
@@ -29,7 +37,11 @@ export const ReferralsPage = () => {
 							<div
 								key={item.photo_url}
 								className='rounded-full border-[3px] border-primary aspect-square'>
-								<img src={item.photo_url} alt='Referral' />
+								<img
+									className='rounded-full'
+									src={item.photo_url ? item.photo_url : '/avatar.jpg'}
+									alt='Referral'
+								/>
 							</div>
 						))}
 				</div>
