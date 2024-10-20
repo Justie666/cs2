@@ -11,6 +11,7 @@ export const Nav = () => {
 	if (pathname === '/settings') return
 	if (pathname === '/referrals') return
 	if (pathname === '/my-skins') return
+	if (pathname === '/training') return
 	if (pathname.includes('/case/')) return
 	if (pathname.includes('/my-skin/')) return
 	if (pathname.includes('/my-bets/')) return
@@ -18,7 +19,7 @@ export const Nav = () => {
 	if (pathname.includes('/bet/')) return
 
 	return (
-		<div className='rounded-[27px] shadow-[0px_-4px_14px_0px_#C9A86B] fixed z-20 bottom-0 w-[99%] left-1/2 -translate-x-1/2 overflow-hidden'>
+		<div className='rounded-[27px] shadow-[0px_-4px_14px_0px_#C9A86B] fixed z-[100] bottom-0 w-[99%] left-1/2 -translate-x-1/2 overflow-hidden'>
 			<div className='shadow-[inset_3px_3px_27.6px_0px_#000000CC] bg-[#2c2c2c] py-[20px] px-[50px] flex items-center justify-between'>
 				<Link to='/' className={`${pathname !== '/' && 'opacity-30'}`}>
 					<TourNamentIcon />

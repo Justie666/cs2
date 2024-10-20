@@ -26,8 +26,8 @@ export const ShopPage = () => {
 					Кейсы
 				</Button>
 			</div>
-			{shopType === 'skins' && <ShopCases />}
-			{shopType === 'cases' && <ShopSkins />}
+			{shopType === 'skins' && <ShopSkins />}
+			{shopType === 'cases' && <ShopCases />}
 		</div>
 	)
 }

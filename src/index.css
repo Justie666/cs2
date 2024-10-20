@@ -9,5 +9,30 @@
 }
 
 .blur {
-	filter: blur(60px);
+	filter: blur(30px);
+}
+
+.image-transition {
+	transition: opacity 0.5s ease-in-out;
+	opacity: 0; /* Start invisible */
+}
+
+.image-transition.visible {
+	opacity: 1; /* Fade in when visible */
+}
+
+/* Для WebKit-браузеров (Chrome, Safari) */
+.overflow-auto::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+/* Для Firefox */
+.overflow-auto {
+	scrollbar-width: none; /* Скрыть скроллбар в Firefox */
+}
+
+/* Универсальное решение для всех */
+.overflow-auto {
+	-ms-overflow-style: none; /* Скрыть скроллбар в IE и Edge */
 }

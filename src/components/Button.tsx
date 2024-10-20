@@ -12,7 +12,7 @@ export const Button = ({
 }: ButtonProps) => {
 	return (
 		<button
-			className={`text-[#000] text-[15px] font-medium w-full py-2 rounded-[8px] ${
+			className={`text-[#000] text-[15px] font-medium w-full py-2 px-3 rounded-[8px] ${
 				isOrange ? 'bg-primary' : isBlue ? 'bg-[#61D9D4]' : 'bg-[#ABABAB]'
 			}`}
 			{...rest}>

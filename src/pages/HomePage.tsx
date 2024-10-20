@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { BackpackIcon } from '../icons/BackpackIcon'
-import { BulletsIcon } from '../icons/BulletsIcon'
 import { Balance } from '../components/Balance'
 import { useGetUserMain } from '../api/hooks/userHooks'
+import { CircleWithBullets } from '../components/CircleWithBullets'
 
 export const HomePage = () => {
 	const { data } = useGetUserMain()
@@ -16,7 +16,6 @@ export const HomePage = () => {
 						alt='avatar'
 						className='size-[50px] rounded-full overflow-hidden object-cover flex-shrink-0'
 					/>
-					{/* TODO сделать получение имени из тг */}
 					<div className='rounded-[50px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.5)] px-4 py-3 font-medium text-[20px] w-full'>
 						{window.Telegram.WebApp.initDataUnsafe.user?.first_name}
 					</div>
@@ -32,21 +31,15 @@ export const HomePage = () => {
 			</div>
 
 			<div className='flex justify-center mt-[30px]'>
-				<img
-					src='/crosshair.png'
-					alt=''
-					className='size-[250px] object-cover'
-				/>
+				<Link to={'/training'}>
+					<img
+						src='/crosshair.png'
+						alt=''
+						className='size-[250px] object-cover'
+					/>
+				</Link>
 			</div>
-			<div className='size-[310px] left-1/2 -translate-x-1/2 -bottom-28 absolute z-20 bg-bgColor rounded-full shadow-[inset_3px_3px_27.6px_#000000CC] flex items-center justify-center'>
-				<div className='rounded-full bg-[#000] shadow-[0px_-4px_4px_0px_#C9A86B] size-[220px] flex justify-center items-start pt-[35px]'>
-					<div className='flex items-center gap-3'>
-						<BulletsIcon />
-						<BulletsIcon />
-						<BulletsIcon />
-					</div>
-				</div>
-			</div>
+			<CircleWithBullets />
 		</div>
 	)
 }

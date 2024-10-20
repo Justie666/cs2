@@ -12,7 +12,7 @@ import { Balance } from '../components/Balance'
 import { DrawerComponent } from '../components/DrawerComponent'
 import { TetherIcon } from '../icons/TetherIcon'
 import { getQuality } from '../utils/getQuality'
-import { getColorQuality } from '../utils/getColorQuality'
+import { getColorQuality } from '../utils/getColorRarity'
 
 export const MySkinsPage = () => {
 	const [value, setValue] = useState('')
@@ -63,6 +63,7 @@ export const MySkinsPage = () => {
 								currency='tether'
 								imgUrl={item.image_url}
 								value={item.price}
+								name={item.name}
 							/>
 						</div>
 					))}
@@ -88,14 +89,14 @@ export const MySkinsPage = () => {
 							<div className='absolute bottom-5 left-5 shadow-[0px_-2px_4px_0px_rgba(0,0,0,0.5)_inset,0px_2px_4px_0px_rgba(0,0,0,0.5)_inset] flex items-center gap-[3px] px-[10px] rounded-[50px]'>
 								<TetherIcon /> {selectedSkin?.price}
 							</div>
-							{selectedSkin?.quality && (
-								<div
-									className='absolute z-10 size-[200px] rounded-full blur'
-									style={{
-										background: getColorQuality(selectedSkin?.quality)
-									}}
-								/>
-							)}
+							{/* {selectedSkin?.quality && (
+								// <div
+								// 	className='absolute z-10 size-[200px] rounded-full blur'
+								// 	style={{
+								// 		background: getColorQuality(selectedSkin?.quality)
+								// 	}}
+								// />
+							)} */}
 						</div>
 						<div className='bg-[#4c4c4c] rounded-[6px] py-[10px] px-[13px] text-[15px] font-medium mt-[34px] flex justify-between'>
 							<div>Качество</div>

@@ -174,3 +174,8 @@ interface CreateBetData {
 	currency: Currency
 	amount: number
 }
+
+interface Options {
+	value: string
+	title: string
+}
