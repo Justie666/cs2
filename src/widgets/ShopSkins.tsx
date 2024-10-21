@@ -171,6 +171,7 @@ export const ShopSkins = () => {
 				<div className='mt-[30px] grid grid-cols-2 gap-x-[20px] gap-y-[30px]'>
 					{skins?.map(skin => (
 						<SkinItem
+							href={`/skin-buy/${skin.id}`}
 							key={skin.id}
 							name={skin.name}
 							value={skin.price}

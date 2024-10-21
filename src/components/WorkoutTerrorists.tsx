@@ -5,14 +5,14 @@ interface WorkoutTerrorist {
 	src: string
 	top: string
 	left: string
-	hp: number
+	z: number
 }
 
 const workoutTerrorists: WorkoutTerrorist[] = [
-	{ src: '/t dance.png', top: '14%', left: '1%', hp: 100 },
-	{ src: '/t knife.png', top: '30%', left: '45%', hp: 100 },
-	{ src: '/t radio.png', top: '35%', left: '10%', hp: 100 },
-	{ src: '/t trap.png', top: '10%', left: '30%', hp: 100 }
+	{ src: '/t dance.png', top: '14%', left: '1%', z: 10 },
+	{ src: '/t knife.png', top: '30%', left: '45%', z: 20 },
+	{ src: '/t radio.png', top: '35%', left: '10%', z: 20 },
+	{ src: '/t trap.png', top: '10%', left: '30%', z: 10 }
 ]
 
 interface IWorkoutTerroristsProps {
@@ -24,59 +24,50 @@ export const WorkoutTerrorists = ({
 	handleDecreaseBullets,
 	onCoinsUpdate
 }: IWorkoutTerroristsProps) => {
-	const [currentIndex, setCurrentIndex] = useState<number>(0)
-	const [isVisible, setIsVisible] = useState<boolean>(false)
-	const [terrorists, setTerrorists] =
-		useState<WorkoutTerrorist[]>(workoutTerrorists)
+	const [visibleTerrorists, setVisibleTerrorists] = useState<
+		WorkoutTerrorist[]
+	>([])
 	const [hitPosition, setHitPosition] = useState<{
 		x: number
 		y: number
 	} | null>(null)
 	const { mutate } = usePathKill()
 
-	const handleHit = (
-		hitType: 'head' | 'body' | 'limbs',
-		x: number,
-		y: number
-	) => {
-		{
-			/* TODO: фикс бага с двойным вызовом функции */
-		}
-		const damage = hitType === 'head' ? 100 : hitType === 'body' ? 25 : 10
-
-		setTerrorists(prevTerrorists => {
-			const newTerrorists = [...prevTerrorists]
-			const currentTerrorist = newTerrorists[currentIndex]
-			currentTerrorist.hp -= damage
-
-			if (currentTerrorist.hp <= 0) {
-				onCoinsUpdate(1)
-				mutate()
-				setIsVisible(false)
-				setHitPosition({ x, y })
-				setTimeout(() => setHitPosition(null), 300)
-				setCurrentIndex(prevIndex => (prevIndex + 1) % workoutTerrorists.length)
-				currentTerrorist.hp = 100
-			}
-
-			return newTerrorists
-		})
-
+	const handleHit = (x: number, y: number, index: number) => {
+		onCoinsUpdate(1) // Добавляем монеты
+		mutate() // Вызываем мутацию
 		handleDecreaseBullets()
+
+		// Удаляем террориста из видимых
+		setVisibleTerrorists(prev => prev.filter((_, i) => i !== index))
+
+		// Позиция попадания
+		setHitPosition({ x, y })
+		setTimeout(() => setHitPosition(null), 300) // Скрываем после 300 мс
 	}
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setIsVisible(true)
+			// 1. Определяем террористов, которые сейчас не на экране
+			const terroristsNotOnScreen = workoutTerrorists.filter(
+				terrorist => !visibleTerrorists.some(vt => vt.src === terrorist.src)
+			)
 
-			setTimeout(() => {
-				setIsVisible(false)
-				setCurrentIndex(prevIndex => (prevIndex + 1) % workoutTerrorists.length)
-			}, 3000)
-		}, 4000)
+			// 2. Проверяем, есть ли не видимые террористы
+			if (terroristsNotOnScreen.length > 0) {
+				// 3. Случайным образом выбираем одного из не видимых террористов
+				const randomIndex = Math.floor(
+					Math.random() * terroristsNotOnScreen.length
+				)
+				const newTerrorist = terroristsNotOnScreen[randomIndex]
+
+				// 4. Добавляем нового террориста в visibleTerrorists
+				setVisibleTerrorists(prev => [...prev, newTerrorist])
+			}
+		}, 2000) // Добавляем нового террориста каждые 2 секунды
 
 		return () => clearInterval(interval)
-	}, [])
+	}, [visibleTerrorists])
 
 	return (
 		<div>
@@ -87,35 +78,20 @@ export const WorkoutTerrorists = ({
                 border-primary border-4 rounded-[77px] z-0'
 				onClick={handleDecreaseBullets}
 			/>
-			{isVisible && (
+			{visibleTerrorists.map((terrorist, index) => (
 				<img
-					src={terrorists[currentIndex].src}
+					key={index} // Используйте индекс как ключ, рассмотрите возможность использования уникального ID в реальном случае
+					src={terrorist.src}
 					alt=''
 					style={{
-						top: terrorists[currentIndex].top,
-						left: terrorists[currentIndex].left
+						top: terrorist.top,
+						left: terrorist.left,
+						zIndex: terrorist.z
 					}}
-					className={`absolute w-[240px] h-[260px] transition-opacity duration-500 ease-in-out z-50 ${
-						isVisible ? 'opacity-100' : 'opacity-0'
-					}`}
-					onClick={e => {
-						const bounds = e.currentTarget.getBoundingClientRect()
-						const clickY = e.clientY - bounds.top
-
-						let hitType: 'head' | 'body' | 'limbs'
-
-						if (clickY < bounds.height * 0.3) {
-							hitType = 'head'
-						} else if (clickY < bounds.height * 0.5) {
-							hitType = 'body'
-						} else {
-							hitType = 'limbs'
-						}
-
-						handleHit(hitType, e.clientX, e.clientY)
-					}}
+					className='absolute w-[240px] h-[260px] transition-opacity duration-500 ease-in-out opacity-100'
+					onClick={e => handleHit(e.clientX, e.clientY, index)}
 				/>
-			)}
+			))}
 			{hitPosition && (
 				<img
 					src='/workout.png'
@@ -124,7 +100,7 @@ export const WorkoutTerrorists = ({
 						top: hitPosition.y,
 						left: hitPosition.x
 					}}
-					className={`size-[80px] z-50 absolute transform -translate-x-1/2 -translate-y-1/2`}
+					className='size-[80px] z-50 absolute transform -translate-x-1/2 -translate-y-1/2'
 				/>
 			)}
 		</div>

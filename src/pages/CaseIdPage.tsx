@@ -1,5 +1,9 @@
 import { useParams } from 'react-router-dom'
-import { useGetCaseById, usePostCaseOpen } from '../api/hooks/caseHooks'
+import {
+	useGetCaseById,
+	useGetCheckCase,
+	usePostCaseOpen
+} from '../api/hooks/caseHooks'
 import { Button } from '../components/Button'
 import { Drawer } from '../components/Drawer'
 import { SkinItem } from '../components/SkinItem'
@@ -9,11 +13,29 @@ import { CoinIcon } from '../icons/CoinIcon'
 import { ModalOpenCase } from '../components/ModalOpenCase'
 import { useEffect, useState } from 'react'
 
+function formatTime(durationInSeconds: number): string {
+	const secondsInMinute = 60
+	const secondsInHour = secondsInMinute * 60
+	const secondsInDay = secondsInHour * 24
+
+	const hours = Math.floor((durationInSeconds % secondsInDay) / secondsInHour)
+	const minutes = Math.floor(
+		(durationInSeconds % secondsInHour) / secondsInMinute
+	)
+	const seconds = durationInSeconds % secondsInMinute
+
+	return `${hours.toString().padStart(2, '0')}:${minutes
+		.toString()
+		.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+}
+
 export const CaseIdPage = () => {
 	const { id } = useParams()
 	const caseId = Number(id)
 	const { data } = useGetCaseById(caseId)
+	const { data: secondsData, isPending } = useGetCheckCase({ case_id: caseId })
 	const [isOpen, setIsOpen] = useState(false)
+	const [remainingSeconds, setRemainingSeconds] = useState<number>(0)
 
 	const {
 		data: mutateData,
@@ -25,7 +47,29 @@ export const CaseIdPage = () => {
 		mutate()
 	}
 
-	console.log(mutateData)
+	useEffect(() => {
+		// Обновляем оставшиеся секунды, если они пришли с бэка
+		if (secondsData?.seconds) {
+			setRemainingSeconds(secondsData.seconds)
+		}
+	}, [secondsData])
+
+	useEffect(() => {
+		// Если есть оставшиеся секунды, запускаем таймер
+		let timer: NodeJS.Timeout | null = null
+		if (remainingSeconds > 0) {
+			timer = setInterval(() => {
+				setRemainingSeconds(prevSeconds => prevSeconds - 1)
+			}, 1000)
+		}
+
+		// Очищаем таймер при размонтировании компонента
+		return () => {
+			if (timer) {
+				clearInterval(timer)
+			}
+		}
+	}, [remainingSeconds])
 
 	useEffect(() => {
 		if (isSuccess) {
@@ -42,6 +86,7 @@ export const CaseIdPage = () => {
 					skins={data.skins}
 					skinId={mutateData?.id}
 					openCase={() => handleOpenCase()}
+					seconds={remainingSeconds}
 				/>
 			)}
 
@@ -62,8 +107,13 @@ export const CaseIdPage = () => {
 					</div>
 				</div>
 				<div className='mt-3'>
-					<Button onClick={() => handleOpenCase()} isOrange>
-						Открыть
+					<Button
+						onClick={() => handleOpenCase()}
+						disabled={isPending || remainingSeconds !== 0}
+						isOrange={!isPending && remainingSeconds === 0}>
+						{!isPending && remainingSeconds === 0
+							? 'Открыть'
+							: formatTime(remainingSeconds)}
 					</Button>
 				</div>
 				<div className='text-primary text-center text-[32px] font-semibold mt-[32px]'>

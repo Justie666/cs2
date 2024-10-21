@@ -12,5 +12,10 @@ export const caseService = {
 
 	postCaseOpen: async (data: PostCaseOpenData) => {
 		return (await authApi.post<{ id: number }>('/case/open', data)).data
+	},
+
+	getCheckCase: async (params: GetCheckCaseParams) => {
+		return (await authApi.get<{ seconds: number }>('/case/check', { params }))
+			.data
 	}
 }

@@ -12,6 +12,7 @@ interface ModalOpenCaseProps {
 	skins: { id: number; chance: number; skin: Skin }[]
 	skinId: number
 	openCase: () => void
+	seconds: number
 }
 
 export const ModalOpenCase = ({
@@ -19,7 +20,8 @@ export const ModalOpenCase = ({
 	onClose,
 	skins,
 	skinId,
-	openCase
+	openCase,
+	seconds
 }: ModalOpenCaseProps) => {
 	const [isRolling, setIsRolling] = useState(false)
 	const [selectedSkin, setSelectedSkin] = useState<Skin | null>(null)
@@ -106,6 +108,12 @@ export const ModalOpenCase = ({
 	document.body.style.overflow = isOpen ? 'hidden' : 'auto'
 	const ref = useRef<HTMLDivElement>(null)
 	useOutsideClick(ref, onClose)
+
+	useEffect(() => {
+		if (seconds > 0 && selectedSkin) {
+			onClose()
+		}
+	}, [onClose, seconds, selectedSkin])
 
 	if (!isOpen) return null
 

@@ -67,3 +67,15 @@ interface CaseId {
 interface PostCaseOpenData {
 	id: number
 }
+
+interface GetCheckCaseParams {
+	case_id: number
+}
+
+interface PostBuySkinData {
+	id: number
+}
+
+interface GetSkinById {
+	skin_id: number
+}

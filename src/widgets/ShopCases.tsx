@@ -14,18 +14,16 @@ export const ShopCases = () => {
 		offset: offset,
 		sorting: typeCases
 	})
+
+	// Обработчик смены типа кейсов
 	const handleSelectTypeCases = (type: CasesType) => {
 		setTypeCases(type)
+		setOffset(0)
 		setCases([])
 	}
 
 	useEffect(() => {
-		setCases([])
-		setOffset(0)
-	}, [typeCases])
-
-	useEffect(() => {
-		if (data) {
+		if (data && data.length > 0) {
 			setCases(prev => [...prev, ...data])
 		}
 	}, [data])
@@ -56,7 +54,7 @@ export const ShopCases = () => {
 			<div>
 				<div className='mt-[30px] grid grid-cols-2 gap-x-[20px] gap-y-[30px]'>
 					{cases && cases.map(item => <CaseItem key={item.id} {...item} />)}
-					{data?.length !== 0 && <div ref={observerRef} />}
+					{cases.length > 0 && data?.length !== 0 && <div ref={observerRef} />}
 				</div>
 			</div>
 		</div>
