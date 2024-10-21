@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { usePathKill } from '../api/hooks/userHooks'
 
 interface WorkoutTerrorist {
 	src: string
@@ -31,6 +32,7 @@ export const WorkoutTerrorists = ({
 		x: number
 		y: number
 	} | null>(null)
+	const { mutate } = usePathKill()
 
 	const handleHit = (
 		hitType: 'head' | 'body' | 'limbs',
@@ -49,6 +51,7 @@ export const WorkoutTerrorists = ({
 
 			if (currentTerrorist.hp <= 0) {
 				onCoinsUpdate(1)
+				mutate()
 				setIsVisible(false)
 				setHitPosition({ x, y })
 				setTimeout(() => setHitPosition(null), 300)

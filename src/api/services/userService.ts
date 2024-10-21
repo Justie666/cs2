@@ -27,5 +27,13 @@ export const userService = {
 				params: { user_id: id }
 			})
 		).data
+	},
+
+	startTrain: async () => {
+		return (await authApi.patch('/user/clip')).data
+	},
+
+	kill: async () => {
+		return (await authApi.patch('/user/coin')).data
 	}
 }

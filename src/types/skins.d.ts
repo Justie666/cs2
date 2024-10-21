@@ -36,3 +36,34 @@ interface Gun {
 	name: string
 	children: Gun[]
 }
+
+type TypeCase = 'paid' | 'free'
+
+interface GetAllCasesParams {
+	limit: number
+	offset: number
+	sorting: TypeCase
+}
+
+type TypePrice = 'friend' | 'coin' | 'usdt'
+
+interface Case {
+	name: string
+	photo_url: string
+	type_price: TypePrice
+	price: number
+	id: number
+}
+
+interface CaseId {
+	name: string
+	photo_url: string
+	type_price: TypePrice
+	price: number
+	id: number
+	skins: { id: number; chance: number; skin: Skin }[]
+}
+
+interface PostCaseOpenData {
+	id: number
+}

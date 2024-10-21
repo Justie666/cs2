@@ -16,14 +16,16 @@ export const DrawerComponent = ({
 	if (!isOpen) return <></>
 
 	return (
-		<div className='absolute inset-0 bg-bgColor rounded-[50px_50px_0_0] border-t-[3px] border-[#4c4c4c] py-[40px] px-[50px]'>
-			<div className='flex items-center justify-between'>
-				<div>{leftSideContent}</div>
-				<div className='cursor-pointer' onClick={onClose}>
-					<CloseIcon />
+		<div className='absolute inset-0 bg-bgColor rounded-[50px_50px_0_0] border-t-[3px] border-[#4c4c4c] py-[40px] px-[50px] z-[100] flex justify-center'>
+			<div className='h-screen'>
+				<div className='flex items-center justify-between'>
+					<div>{leftSideContent}</div>
+					<div className='cursor-pointer' onClick={onClose}>
+						<CloseIcon />
+					</div>
 				</div>
+				{children}
 			</div>
-			{children}
 		</div>
 	)
 }

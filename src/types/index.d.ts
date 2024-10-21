@@ -88,6 +88,7 @@ interface ISkins {
 	gun_id: number
 	quality: string
 	image_url: string
+	rarity: Rarity
 }
 
 interface ITeam {

@@ -1,11 +1,24 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BackpackIcon } from '../icons/BackpackIcon'
 import { Balance } from '../components/Balance'
-import { useGetUserMain } from '../api/hooks/userHooks'
+import { useGetUserMain, usePathStartTrain } from '../api/hooks/userHooks'
 import { CircleWithBullets } from '../components/CircleWithBullets'
+import { useEffect } from 'react'
 
 export const HomePage = () => {
 	const { data } = useGetUserMain()
+	const navigate = useNavigate()
+	const { mutate, isSuccess } = usePathStartTrain()
+
+	const handleStartTrain = () => {
+		mutate()
+	}
+
+	useEffect(() => {
+		if (isSuccess) {
+			navigate('/training')
+		}
+	}, [isSuccess, navigate])
 
 	return (
 		<div className='relative container px-5 pt-4 flex flex-col min-h-screen z-10 overflow-hidden'>
@@ -31,13 +44,13 @@ export const HomePage = () => {
 			</div>
 
 			<div className='flex justify-center mt-[30px]'>
-				<Link to={'/training'}>
+				<div onClick={handleStartTrain} className='cursor-pointer'>
 					<img
 						src='/crosshair.png'
 						alt=''
 						className='size-[250px] object-cover'
 					/>
-				</Link>
+				</div>
 			</div>
 			<CircleWithBullets />
 		</div>

@@ -11,7 +11,6 @@ export const TrainingPage = () => {
 	const [isStartWorkout, setIsStartWorkout] = useState<boolean>(false)
 	const [bullets, setBullets] = useState<number>(30)
 	const [showCoinGain, setShowCoinGain] = useState(false)
-
 	const navigate = useNavigate()
 
 	const handleCoinsUpdate = () => {
@@ -63,9 +62,9 @@ export const TrainingPage = () => {
 	return (
 		<div className='relative container px-5 pt-4 flex flex-col min-h-screen z-10 overflow-hidden items-center'>
 			<div className='w-11/12 h-[79px] flex items-center justify-center rounded-[27px] shadow-inset-custom z-20 bg-bgColor'>
-				<div className='flex items-center justify-center gap-[30px]'>
+				<div className='flex items-center justify-center gap-[30px] relative'>
 					{showCoinGain && (
-						<span className='text-red-500 animate-coin-gain absolute left-[20%] font-bold text-[20px]'>
+						<span className='text-red-500 animate-coin-gain absolute font-bold text-[20px] -left-7'>
 							+1
 						</span>
 					)}

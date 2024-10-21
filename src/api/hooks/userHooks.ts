@@ -1,5 +1,7 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { userService } from '../services/userService'
+import { AxiosError } from 'axios'
+import { toast } from 'sonner'
 
 export const useGetUserMain = () =>
 	useQuery({
@@ -57,5 +59,34 @@ export const useGetTradeURL = () =>
 export const useUpdateTradeURL = () => {
 	return useMutation({
 		mutationFn: (data: UpdateTradeURLData) => userService.updateTradeURL(data)
+	})
+}
+
+export const usePathStartTrain = () => {
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: () => userService.startTrain(),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['userMain'] })
+		},
+		onError: error => {
+			const axiosError = error as AxiosError<{ detail: string }>
+			toast.error(axiosError.response?.data?.detail || 'Произошла ошибка')
+		}
+	})
+}
+
+export const usePathKill = () => {
+	const queryClient = useQueryClient()
+
+	return useMutation({
+		mutationFn: () => userService.kill(),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['userMain'] })
+		},
+		onError: error => {
+			const axiosError = error as AxiosError<{ detail: string }>
+			toast.error(axiosError.response?.data?.detail || 'Произошла ошибка')
+		}
 	})
 }

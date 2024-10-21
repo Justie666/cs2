@@ -3,14 +3,22 @@ import { CoinIcon } from '../icons/CoinIcon'
 import { RefIcon } from '../icons/RefIcon'
 import { TetherIcon } from '../icons/TetherIcon'
 
-export const Balance = ({ referrers }: { referrers?: boolean }) => {
+export const Balance = ({
+	referrers,
+	initCoin
+}: {
+	referrers?: boolean
+	initCoin?: number
+}) => {
 	const { data } = useGetUserMain()
 
 	return (
 		<div className='flex items-center justify-center gap-[5px]'>
 			<div className='shadow-inset-custom rounded-full pl-1 pr-3 flex items-center gap-[6px]'>
 				<CoinIcon />
-				<div className='font-medium text-[20px]'>{data?.balance_coin || 0}</div>
+				<div className='font-medium text-[20px]'>
+					{initCoin ? initCoin : data?.balance_coin || 0}
+				</div>
 			</div>
 			<div className='shadow-inset-custom rounded-full pl-1 pr-3 flex items-center gap-[6px]'>
 				<TetherIcon />

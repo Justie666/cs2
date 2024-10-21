@@ -85,7 +85,6 @@ export const ShopSkins = () => {
 		onChange: entry => {
 			if (entry.isIntersecting) {
 				setOffset(prev => prev + limit)
-				console.log('321')
 			}
 		}
 	})

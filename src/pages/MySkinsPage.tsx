@@ -12,7 +12,7 @@ import { Balance } from '../components/Balance'
 import { DrawerComponent } from '../components/DrawerComponent'
 import { TetherIcon } from '../icons/TetherIcon'
 import { getQuality } from '../utils/getQuality'
-import { getColorQuality } from '../utils/getColorRarity'
+import { getColorRarity } from '../utils/getColorRarity'
 
 export const MySkinsPage = () => {
 	const [value, setValue] = useState('')
@@ -53,7 +53,7 @@ export const MySkinsPage = () => {
 				<div className='flex flex-col mt-[16px]'>
 					<Button isOrange>Вывод скинов</Button>
 				</div>
-				<div className='mt-[56px] grid grid-cols-2'>
+				<div className='mt-[56px] grid grid-cols-2 gap-x-[20px] gap-y-[30px]'>
 					{data?.skins?.map(item => (
 						<div
 							key={item.id}
@@ -62,6 +62,7 @@ export const MySkinsPage = () => {
 							<SkinItem
 								currency='tether'
 								imgUrl={item.image_url}
+								rarity={item.rarity}
 								value={item.price}
 								name={item.name}
 							/>
@@ -86,20 +87,19 @@ export const MySkinsPage = () => {
 								alt='case'
 							/>
 							<div className='absolute top-1/2 left-1/2 -translate-1/2' />
-							<div className='absolute bottom-5 left-5 shadow-[0px_-2px_4px_0px_rgba(0,0,0,0.5)_inset,0px_2px_4px_0px_rgba(0,0,0,0.5)_inset] flex items-center gap-[3px] px-[10px] rounded-[50px]'>
+							<div className='absolute bottom-5 left-5 shadow-[0px_-2px_4px_0px_rgba(0,0,0,0.5)_inset,0px_2px_4px_0px_rgba(0,0,0,0.5)_inset] flex items-center gap-[3px] px-[10px] rounded-[50px] z-50'>
 								<TetherIcon /> {selectedSkin?.price}
 							</div>
-							{/* {selectedSkin?.quality && (
-								// <div
-								// 	className='absolute z-10 size-[200px] rounded-full blur'
-								// 	style={{
-								// 		background: getColorQuality(selectedSkin?.quality)
-								// 	}}
-								// />
-							)} */}
+							{selectedSkin?.quality && (
+								<div
+									className='absolute z-10 size-[200px] rounded-full blur'
+									style={{
+										background: getColorRarity(selectedSkin?.rarity)
+									}}
+								/>
+							)}
 						</div>
-						<div className='bg-[#4c4c4c] rounded-[6px] py-[10px] px-[13px] text-[15px] font-medium mt-[34px] flex justify-between'>
-							<div>Качество</div>
+						<div className='bg-[#4c4c4c] rounded-[6px] py-[10px] px-[13px] text-[15px] font-medium mt-[34px] flex justify-between gap-2'>
 							{selectedSkin?.quality && (
 								<div>{getQuality(selectedSkin?.quality)}</div>
 							)}

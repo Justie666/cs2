@@ -9,9 +9,9 @@ export const ArrowUpSelectIcon = () => {
 			<path
 				d='M7 13.5L12 10.5L17 13.5'
 				stroke='#F1FAEE'
-				stroke-width='3'
-				stroke-linecap='round'
-				stroke-linejoin='round'
+				strokeWidth='3'
+				strokeLinecap='round'
+				strokeLinejoin='round'
 			/>
 		</svg>
 	)

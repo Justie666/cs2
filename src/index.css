@@ -36,3 +36,27 @@
 .overflow-auto {
 	-ms-overflow-style: none; /* Скрыть скроллбар в IE и Edge */
 }
+
+@keyframes slide {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-150%);
+	}
+}
+
+.animate-slide {
+	animation: slide 5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+.carousel {
+	overflow-x: auto;
+	white-space: nowrap;
+	display: flex;
+}
+
+.skin {
+	width: 100px; /* Ширина изображения скина */
+	display: inline-block;
+}
