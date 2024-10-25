@@ -2,7 +2,9 @@ import { api, authApi } from '../instance'
 
 export const authService = {
 	login: async (data: LoginData) => {
-		const response = await api.post('/auth/login', data)
+		const response = await api.post('/auth/login', data, {
+			withCredentials: true
+		})
 
 		const accessToken = response.headers['authorization']
 

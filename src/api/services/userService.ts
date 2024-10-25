@@ -35,5 +35,18 @@ export const userService = {
 
 	kill: async () => {
 		return (await authApi.patch('/user/coin')).data
+	},
+
+	pathCoin: async (data: PathCoinData) => {
+		return (await authApi.patch('/user/usdt', data)).data
+	},
+
+	sellSkin: async (data: SellSkinData) => {
+		return (await authApi.post('/skin/sell', data)).data
+	},
+
+	outputSkin: async (data: OutputSkinData) => {
+		return (await authApi.post<{ status: Success }>('/skin/receiving', data))
+			.data
 	}
 }

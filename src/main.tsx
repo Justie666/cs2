@@ -18,6 +18,7 @@ import { MyBetsPage } from './pages/MyBetsPage'
 import { BetPage } from './pages/BetPage'
 import { TrainingPage } from './pages/TrainingPage'
 import { SkinBuyPage } from './pages/SkinBuyPage'
+import { ReplenishPage } from './pages/ReplenishPage'
 
 const router = createBrowserRouter([
 	{
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
 			{
 				path: '/skin-buy/:id',
 				element: <SkinBuyPage />
+			},
+			{
+				path: '/replenish',
+				element: <ReplenishPage />
 			}
 		]
 	}

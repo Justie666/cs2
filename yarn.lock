@@ -666,6 +666,11 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
+"@types/telegram-web-app@^7.10.1":
+  version "7.10.1"
+  resolved "https://registry.yarnpkg.com/@types/telegram-web-app/-/telegram-web-app-7.10.1.tgz#7e5730328d1b96adf239504a60727549343f8d25"
+  integrity sha512-GKL659G6lnHRAt3Dt7L1Fa0dwvc+ZZQtJcYrJVJGwjvsbi/Rcp1qKs9pFwb34/KC04+J+TlQj4D7yKo10sBSEw==
+
 "@typescript-eslint/eslint-plugin@8.7.0":
   version "8.7.0"
   resolved "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.7.0.tgz"

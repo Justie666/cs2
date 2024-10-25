@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Drawer } from '../components/Drawer'
-import { QuestionIcon } from '../icons/QuestionIcon'
 import { ProfileLink } from '../components/ProfileLink'
 import { StatsIcon } from '../icons/StatsIcon'
 import { SkinIcon } from '../icons/SkinIcon'
@@ -8,6 +7,7 @@ import { RefIcon } from '../icons/RefIcon'
 import { BetsIcon } from '../icons/BetsIcon'
 import { SettingsIcon } from '../icons/SettingsIcon'
 import { useGetUserFull, useGetUserMain } from '../api/hooks/userHooks'
+import { DollarSign } from 'lucide-react'
 
 export const ProfilePage = () => {
 	useGetUserFull()
@@ -18,10 +18,10 @@ export const ProfilePage = () => {
 			<Drawer
 				leftSideContent={
 					<Link
-						to={'/info'}
+						to={'/settings'}
 						className='block size-[44px] rounded-full shadow-[inset_0px_4px_4px_0px_#FFFFFF40]'>
 						<div className='w-full h-full rounded-full flex items-center justify-center shadow-[0px_1px_2px_1px_#000000]'>
-							<QuestionIcon />
+							<SettingsIcon />
 						</div>
 					</Link>
 				}>
@@ -39,9 +39,9 @@ export const ProfilePage = () => {
 					<div className='relative -top-9'>
 						<div className='relative mt-[100px]'>
 							<Link
-								to={'/settings'}
+								to={'/replenish'}
 								className='bg-bgColor shadow-[inset_0px_4px_4px_0px_#FFFFFF40,_0px_1px_2px_1px_#000000] size-[68px] flex items-center justify-center rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-								<SettingsIcon />
+								<DollarSign size={36} />
 							</Link>
 							<div className='flex items-center gap-[32px] mb-[32px] justify-center'>
 								<ProfileLink

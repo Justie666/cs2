@@ -7,7 +7,9 @@ export const ReferralsPage = () => {
 	const { data } = useGetUserFull()
 
 	const handleCopy = () => {
-		navigator.clipboard.writeText('https://betswap.io?referrer32133')
+		navigator.clipboard.writeText(
+			`https://t.me/betscs2bot?startapp=referrer${window.Telegram.WebApp.initDataUnsafe.user?.id}`
+		)
 		toast.success('Ссылка скопирована')
 	}
 

@@ -31,15 +31,13 @@ export const SkinItem = ({
 	return (
 		<div
 			onClick={() => handleClick()}
-			className={`relative ${href && 'cursor-pointer'}`}>
-			<div className='w-full aspect-square rounded-[15px] bg-[#161616] flex items-center justify-center'>
-				<img src={imgUrl} alt='' className='z-50' />
-			</div>
-			<div className='px-3 mt-3 absolute left-1/2 -translate-x-1/2 -top-[2px] text-center'>
-				{name}
+			className={`h-full relative ${href && 'cursor-pointer'}`}>
+			<div className='w-full pt-2 pb-6 h-full rounded-[15px] bg-[#161616] flex items-center justify-center flex-col'>
+				<div className='px-3 mt-3 text-center'>{name}</div>
+				<img src={imgUrl} alt='' className='z-50 h-[100px] object-cover' />
 			</div>
 			{value && (
-				<div className='absolute left-1/2 -translate-x-1/2 top-[140px] bg-bgColor shadow-inset-custom rounded-full z-50 pl-[3px] pr-[10px] flex items-center gap-[6px]'>
+				<div className='absolute left-1/2 -translate-x-1/2 -bottom-[15px] bg-bgColor shadow-inset-custom rounded-full z-50 pl-[3px] pr-[10px] flex items-center gap-[6px]'>
 					{currency === 'coin' && <CoinIcon />}
 					{currency === 'tether' && <TetherIcon />}
 					{currency === 'referrals' && <TeamIcon />}

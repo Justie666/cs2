@@ -48,26 +48,28 @@ export const WorkoutTerrorists = ({
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			// 1. Определяем террористов, которые сейчас не на экране
 			const terroristsNotOnScreen = workoutTerrorists.filter(
 				terrorist => !visibleTerrorists.some(vt => vt.src === terrorist.src)
 			)
 
-			// 2. Проверяем, есть ли не видимые террористы
 			if (terroristsNotOnScreen.length > 0) {
-				// 3. Случайным образом выбираем одного из не видимых террористов
 				const randomIndex = Math.floor(
 					Math.random() * terroristsNotOnScreen.length
 				)
 				const newTerrorist = terroristsNotOnScreen[randomIndex]
 
-				// 4. Добавляем нового террориста в visibleTerrorists
 				setVisibleTerrorists(prev => [...prev, newTerrorist])
+
+				setTimeout(() => {
+					setVisibleTerrorists(prev =>
+						prev.filter(terrorist => terrorist.src !== newTerrorist.src)
+					)
+				}, 4000)
 			}
-		}, 2000) // Добавляем нового террориста каждые 2 секунды
+		}, 1000)
 
 		return () => clearInterval(interval)
-	}, [visibleTerrorists])
+	}, [visibleTerrorists]) // добавил зависимость workoutTerrorists
 
 	return (
 		<div>

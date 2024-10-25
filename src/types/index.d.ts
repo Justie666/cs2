@@ -180,3 +180,25 @@ interface Options {
 	value: string
 	title: string
 }
+
+interface PathCoinData {
+	value: number
+}
+
+interface OutputSkinData {
+	id: number
+}
+
+type Success =
+	| 'success'
+	| 'not_found_trade_url'
+	| 'no_validated_trade_url'
+	| 'not_found_skin'
+	| 'no_skins'
+	| 'no_money'
+	| 'didnt_buy'
+	| 'unknown_error'
+
+interface SellSkinData {
+	id: number
+}

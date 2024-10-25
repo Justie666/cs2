@@ -12,6 +12,7 @@ export const Nav = () => {
 	if (pathname === '/referrals') return
 	if (pathname === '/my-skins') return
 	if (pathname === '/training') return
+	if (pathname === '/replenish') return
 	if (pathname.includes('/case/')) return
 	if (pathname.includes('/my-skin/')) return
 	if (pathname.includes('/my-bets/')) return
