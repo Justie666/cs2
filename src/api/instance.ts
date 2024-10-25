@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 export const api = axios.create({
-	baseURL: 'https://api.two-market.ru'
+	baseURL: 'https://api.cs-limited.ru'
 })
 
 export const authApi = axios.create({
-	baseURL: 'https://api.two-market.ru'
+	baseURL: 'https://api.cs-limited.ru'
 })
 
 authApi.interceptors.request.use(
@@ -36,7 +36,7 @@ authApi.interceptors.response.use(
 
 			try {
 				const response = await axios.post(
-					'https://api.two-market.ru/auth/refresh',
+					'https://api.cs-limited.ru/auth/refresh',
 					{
 						user_id: window.Telegram.WebApp.initDataUnsafe.user?.id
 					},
